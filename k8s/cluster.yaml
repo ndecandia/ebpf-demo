@@ -7,7 +7,22 @@ networking:
 nodes:
 - role: control-plane
   image: kindest/node:v1.31.0
+  extraPortMappings:
+  - containerPort: 30080
+    hostPort: 30080
+    listenAddress: "0.0.0.0"
+    protocol: tcp
 - role: worker
   image: kindest/node:v1.31.0
+  extraPortMappings:
+  - containerPort: 30080
+    hostPort: 30080
+    listenAddress: "0.0.0.0"
+    protocol: tcp
 - role: worker
   image: kindest/node:v1.31.0
+  extraPortMappings:
+  - containerPort: 30080
+    hostPort: 30080
+    listenAddress: "0.0.0.0"
+    protocol: tcp

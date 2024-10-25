@@ -23,7 +23,7 @@ kind: Service
 metadata:
   name: webserver-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: webserver
   ports:
