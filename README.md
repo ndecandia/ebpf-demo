@@ -45,6 +45,19 @@ kubectl get nodes -A
 Note the **“NotReady”** status.
 This is because we have not yet installed a CNI plugin to provide the >networking.
 
+
+Delete Daemonset of kubeproxy
+
+```bash
+kubectl -n kube-system delete ds kube-proxy
+```
+
+Delete the configmap as well to avoid kube-proxy being reinstalled during a Kubeadm upgrade (works only for K8s 1.19 and newer)
+
+```bash
+kubectl -n kube-system delete cm kube-proxy
+```
+
 Install Cilium CLI, Cilium is an open-source project that provides advanced networking and observability capabilities for Kubernetes clusters.
 
 ```bash
@@ -54,15 +67,11 @@ sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
 rm cilium-linux-amd64.tar.gz
 ```
 
-
 Install a specific version of Cilium with a particular configuration option:
-
 
 ```
 cilium install --version="1.16.2" -f k8s/cilium.yaml
 ```
-
-
 
 After initializing the cluster, proceed to build the Docker image from the Dockerfile. This image includes all necessary components to run the eBPF program, such as BCC and the eBPF script named dddos.py. To view the contents of this script, run:
 
@@ -83,15 +92,30 @@ cd ..
 You may choose any name for the image, but ensure consistency throughout the tutorial. After creating the image, load it into the Kubernetes cluster with:
 
 ```bash
-kind load docker-image r.deso.tech/ebpf-demo/ebpf-probe
+docker image ls
 ```
 
-With the image loaded, you can deploy an Nginx server to your cluster. The `k8s/ds.yaml` file includes configuration details for deploying a webserver with three replicas in the default namespace:
+> ```bash
+> REPOSITORY                         TAG       IMAGE ID       CREATED         SIZE
+> r.deso.tech/ebpf-demo/ebpf-probe   latest    6374cadc8d5c   2 minutes ago   310MB
+> ```
+
+```bash
+kind load docker-image r.deso.tech/ebpf-demo/ebpf-probe --name desocilium
+```
+
+With the image loaded, you can deploy an webserver to your cluster. The `k8s/deploy.yaml` file includes configuration details for deploying a webserver with three replicas in the default namespace:
+
 
 Deploy this manifest using the following command:
 
 ```bash
-kubectl apply -f k8s/ds.yaml
+kubectl apply -f k8s/deploy.yaml
 ```
+
+> ```
+> deployment.apps/webserver-deployment created
+> service/webserver-service created
+> ```
 
 You can access to the loadbalancer IP
