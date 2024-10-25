@@ -4,7 +4,7 @@ l2podAnnouncements:
   enabled: true
 externalIPs:
   enabled: true
-kubeProxyReplacement: strict
+kubeProxyReplacement: true
 hubble:
   relay:
     enabled: true

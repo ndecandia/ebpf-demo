@@ -59,7 +59,7 @@ Install a specific version of Cilium with a particular configuration option:
 
 
 ```
-cilium install --version="1.16.2 -f ks8/cilium.yaml
+cilium install --version="1.16.2" -f k8s/cilium.yaml
 ```
 
 
