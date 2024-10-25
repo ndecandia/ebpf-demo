@@ -1,5 +1,16 @@
 # How to Deploy eBPF Demo on Kubernetes
 
+## Prerequisites
+
+To complete the tutorial, you'll need all of the following:
+
+- A Kubernetes cluster: You need an up-and-running Kubernetes cluster that you'll observe using the eBPF DDoS detector. You can use any local cluster, such as kind, minikube, or K3s. This tutorial uses kind.
+- The kubectl CLI: The kubectl CLI provides access to your Kubernetes cluster resources and allows you to issue commands. You can install kubectl by following the steps in the official documentation.
+- BCC: BCC is a toolkit that makes it easy to create eBPF programs. It allows engineers to make kernel instrumentation in C and has Python and Lua frontends. You can install it by following the official installation instructions.
+- hping3: hping3 is a CLI-based flooder that will be used to simulate a DDoS attack on your Kubernetes cluster. You can use any other tool of your choice here.
+
+## Demo
+
 The code snippets and configurations used in this guide are available in a Git repository. You can download the repository to your Linux machine by executing:
 
 ```bash
@@ -143,9 +154,10 @@ sudo hping3 10.10.10.10 -S -A -V -p 30080 -i u100
 
 Check the logs to verify if the eBPF program detected the attack:
 
-```
+```bash
 kubectl logs ds/ebpf-daemonset --tail 20
 ```
+
 The name of the DaemonSet pod will be different on your machine, so make sure you replace that accordingly.
 
 This command should print out the last twenty lines of output from the eBPF container, indicating that your program detected the DDoS simulation as expected:
