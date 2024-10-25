@@ -48,12 +48,18 @@ This is because we have not yet installed a CNI plugin to provide the >networkin
 Install Cilium CLI, Cilium is an open-source project that provides advanced networking and observability capabilities for Kubernetes clusters.
 
 ```bash
-CILIUM_CLI_VERSION=v0.15.0
+CILIUM_CLI_VERSION=v0.16.2
 curl -L --fail --remote-name-all https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-amd64.tar.gz
 sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
 rm cilium-linux-amd64.tar.gz
 ```
 
+
+Install a specific version of Cilium with a particular configuration option:
+
+```
+/usr/local/bin/cilium install --set=ipam.mode=kubernetes --version="1.16.2"
+```
 
 
 
