@@ -10,19 +10,9 @@ nodes:
   extraPortMappings:
   - containerPort: 30080
     hostPort: 30080
-    listenAddress: "10.10.10.10"
+    listenAddress: "0.0.0.0"
     protocol: tcp
 - role: worker
   image: kindest/node:v1.31.0
-  extraPortMappings:
-  - containerPort: 30080
-    hostPort: 30080
-    listenAddress: "10.10.10.10"
-    protocol: tcp
 - role: worker
   image: kindest/node:v1.31.0
-  extraPortMappings:
-  - containerPort: 30080
-    hostPort: 30080
-    listenAddress: "10.10.10.10"
-    protocol: tcp
