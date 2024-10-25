@@ -1,0 +1,12 @@
+ipam:
+  mode: kubernetes
+l2podAnnouncements:
+  enabled: true
+externalIPs:
+  enabled: true
+kubeProxyReplacement: strict
+hubble:
+  relay:
+    enabled: true
+  ui:
+    enabled: true

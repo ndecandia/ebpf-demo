@@ -36,10 +36,10 @@ kubectl get nodes -A
 ```
 
 >```bash
-> NAME                       STATUS     ROLES           AGE   VERSION
-> desocilium-control-plane   NotReady   control-plane   61s   v1.27.3
-> desocilium-worker          NotReady   <none>          39s   v1.27.3
-> desocilium-worker2         NotReady   <none>          34s   v1.27.3
+> NAME                       STATUS     ROLES           AGE     VERSION
+> desocilium-control-plane   NotReady   control-plane   7m1s    v1.31.0
+> desocilium-worker          NotReady   <none>          6m46s   v1.31.0
+> desocilium-worker2         NotReady   <none>          6m46s   v1.31.0
 >```
 
 Note the **“NotReady”** status.
@@ -57,8 +57,9 @@ rm cilium-linux-amd64.tar.gz
 
 Install a specific version of Cilium with a particular configuration option:
 
+
 ```
-/usr/local/bin/cilium install --set=ipam.mode=kubernetes --version="1.16.2"
+cilium install --version="1.16.2 -f ks8/cilium.yaml
 ```
 
 
